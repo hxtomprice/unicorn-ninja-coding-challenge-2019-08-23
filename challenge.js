@@ -1,5 +1,10 @@
 const unobstructedWestViewCount = buildings => {
-  throw new Error('implement me!')
+  return buildings.reduce((visible, building) => {
+    if (!visible.length || building < visible[0]) {
+      return [ building, ...visible ]
+    }
+    return [ ...new Set(visible.map(v => building > v ? building : v)) ]
+  }, []).length
 }
 
 module.exports = { unobstructedWestViewCount }
